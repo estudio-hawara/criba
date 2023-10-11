@@ -7,17 +7,17 @@
             "Criba\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
     "authors": [
         {
             "name": "Carlos Capote Pérez-Andreu",
             "email": "carlos.capote@hawara.es"
         }
     ],
-    "require-dev": {
-        "pestphp/pest": "^2.23",
-        "laravel/pint": "^1.13",
-        "psy/psysh": "^0.11.21"
-    },
     "config": {
         "allow-plugins": {
             "pestphp/pest-plugin": true
@@ -25,5 +25,10 @@
     },
     "require": {
         "illuminate/database": "^10.28"
+    },
+    "require-dev": {
+        "pestphp/pest": "^2.23",
+        "laravel/pint": "^1.13",
+        "psy/psysh": "^0.11.21"
     }
 }

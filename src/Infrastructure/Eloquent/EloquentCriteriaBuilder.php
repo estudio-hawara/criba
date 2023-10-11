@@ -39,7 +39,7 @@ class EloquentCriteriaBuilder
         return $query;
     }
 
-    private static function filter(Builder $query, Filter $filter, string $where = 'where'): Builder
+    private function filter(Builder $query, Filter $filter, string $where = 'where'): Builder
     {
         if ($filter->parentheses) {
             return $query->$where(function (Builder $query) use ($filter) {
@@ -50,7 +50,7 @@ class EloquentCriteriaBuilder
         }
     }
 
-    private static function join(Builder $query, Filter $filter): Builder
+    private function join(Builder $query, Filter $filter): Builder
     {
         $query = self::condition($query, $filter->condition);
 
@@ -65,7 +65,7 @@ class EloquentCriteriaBuilder
         }
     }
 
-    private static function condition(Builder $query, Condition|Comparison|Filter $filter, string $where = 'where'): Builder
+    private function condition(Builder $query, Condition|Comparison|Filter $filter, string $where = 'where'): Builder
     {
         if ($filter instanceof Condition && $filter->operator !== 'in') {
             if ($filter->negate) {
@@ -95,7 +95,7 @@ class EloquentCriteriaBuilder
         }
     }
 
-    private static function sort(Builder $query, OrderBy $orderBy): Builder
+    private function sort(Builder $query, OrderBy $orderBy): Builder
     {
         foreach ($orderBy->orders as $field => $direction) {
             $query->orderBy($field, $direction);
@@ -104,7 +104,7 @@ class EloquentCriteriaBuilder
         return $query;
     }
 
-    private static function page(Builder $query, Page $page): Builder
+    private function page(Builder $query, Page $page): Builder
     {
         if (! is_null($page->offset)) {
             $query->skip($page->offset);
