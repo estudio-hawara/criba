@@ -22,5 +22,8 @@
         "allow-plugins": {
             "pestphp/pest-plugin": true
         }
+    },
+    "require": {
+        "illuminate/database": "^10.28"
     }
 }

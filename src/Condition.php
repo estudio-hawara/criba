@@ -15,8 +15,7 @@ class Condition
         public readonly string $field,
         public readonly string $operator,
         public readonly string|bool|int|float|array|null $value,
-        public readonly bool $negate = false,
-        public readonly bool $parentheses = false
+        public readonly bool $negate = false
     ) {
         $this->assertIsValidFieldName($field);
         $this->assertIsValidOperator($operator);

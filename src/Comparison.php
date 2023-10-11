@@ -14,9 +14,7 @@ class Comparison
     public function __construct(
         public readonly string $field,
         public readonly string $operator,
-        public readonly string $otherField,
-        public readonly bool $negate = false,
-        public readonly bool $parentheses = false
+        public readonly string $otherField
     ) {
         $this->assertIsValidFieldName($field);
         $this->assertIsValidOperator($operator);
