@@ -6,7 +6,7 @@ namespace Tests\Fixtures\Eloquent\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Country extends Model
+class CountryModel extends Model
 {
     protected $table = 'countries';
 

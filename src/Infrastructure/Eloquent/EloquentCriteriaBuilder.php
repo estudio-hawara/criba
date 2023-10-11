@@ -42,31 +42,37 @@ class EloquentCriteriaBuilder
     private function filter(Builder $query, Filter $filter, string $where = 'where'): Builder
     {
         if ($filter->parentheses) {
-            return $query->$where(function (Builder $query) use ($filter) {
-                self::join($query, $filter);
+            return $query->$where(function (Builder $query) use ($filter, $where) {
+                self::join($query, $filter, $where);
             });
         } else {
-            return self::join($query, $filter);
+            return self::join($query, $filter, $where);
         }
     }
 
-    private function join(Builder $query, Filter $filter): Builder
+    private function join(Builder $query, Filter $filter, string $where = 'where'): Builder
     {
-        $query = self::condition($query, $filter->condition);
+        $query = self::condition($query, $filter->condition, $where);
 
         if ($filter->join) {
             if ($filter->join === 'and') {
-                return self::condition($query, $filter->extraCondition);
+                return self::condition($query, $filter->extraCondition, 'where');
             }
 
             if ($filter->join === 'or') {
                 return self::condition($query, $filter->extraCondition, 'orWhere');
             }
         }
+
+        return $query;
     }
 
-    private function condition(Builder $query, Condition|Comparison|Filter $filter, string $where = 'where'): Builder
+    private function condition(Builder $query, Condition|Comparison|Filter|null $filter, string $where = 'where'): Builder
     {
+        if (is_null($filter)) {
+            return $query;
+        }
+
         if ($filter instanceof Condition && $filter->operator !== 'in') {
             if ($filter->negate) {
                 $where = $where."Not";
