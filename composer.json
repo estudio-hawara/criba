@@ -1,0 +1,17 @@
+{
+    "name": "hawara-es/criba",
+    "description": "A generic implementation of the criteria pattern",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Criba\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Carlos Capote Pérez-Andreu",
+            "email": "carlos.capote@hawara.es"
+        }
+    ],
+    "require": {}
+}
