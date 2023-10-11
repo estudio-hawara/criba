@@ -13,5 +13,12 @@
             "email": "carlos.capote@hawara.es"
         }
     ],
-    "require": {}
+    "require-dev": {
+        "pestphp/pest": "^2.23"
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    }
 }
