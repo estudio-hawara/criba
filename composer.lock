@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d2174d72d4fd97f3690e2db502f7f8f9",
+    "content-hash": "fb874390b84fe5a97274991d73e977e0",
     "packages": [],
     "packages-dev": [
         {
@@ -339,6 +339,72 @@
                 "source": "https://github.com/Jean85/pretty-package-versions/tree/2.0.5"
             },
             "time": "2021-10-08T21:21:46+00:00"
+        },
+        {
+            "name": "laravel/pint",
+            "version": "v1.13.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/pint.git",
+                "reference": "93b2d0d49719bc6e444ba21cd4dbbccec935413d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/pint/zipball/93b2d0d49719bc6e444ba21cd4dbbccec935413d",
+                "reference": "93b2d0d49719bc6e444ba21cd4dbbccec935413d",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "ext-mbstring": "*",
+                "ext-tokenizer": "*",
+                "ext-xml": "*",
+                "php": "^8.1.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.34.1",
+                "illuminate/view": "^10.23.1",
+                "laravel-zero/framework": "^10.1.2",
+                "mockery/mockery": "^1.6.6",
+                "nunomaduro/larastan": "^2.6.4",
+                "nunomaduro/termwind": "^1.15.1",
+                "pestphp/pest": "^2.18.2"
+            },
+            "bin": [
+                "builds/pint"
+            ],
+            "type": "project",
+            "autoload": {
+                "psr-4": {
+                    "App\\": "app/",
+                    "Database\\Seeders\\": "database/seeders/",
+                    "Database\\Factories\\": "database/factories/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nuno Maduro",
+                    "email": "enunomaduro@gmail.com"
+                }
+            ],
+            "description": "An opinionated code formatter for PHP.",
+            "homepage": "https://laravel.com",
+            "keywords": [
+                "format",
+                "formatter",
+                "lint",
+                "linter",
+                "php"
+            ],
+            "support": {
+                "issues": "https://github.com/laravel/pint/issues",
+                "source": "https://github.com/laravel/pint"
+            },
+            "time": "2023-10-10T15:39:09+00:00"
         },
         {
             "name": "myclabs/deep-copy",
