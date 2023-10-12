@@ -157,6 +157,8 @@ $query->get()->all();
 
 At this moment, only an Eloquent implementation has been written.
 
+See: [tests/Fixtures/Eloquent/Repository/CountryRepository.php](tests/Fixtures/Eloquent/Repository/CountryRepository.php) to check how this fits when used with the repository pattern (in a domain driven design example).
+
 ## Install
 
 For the moment this isn't a production ready package, so it isn't still available via Composer. If you still want to test it then clone it and use Composer to install its dependencies.
