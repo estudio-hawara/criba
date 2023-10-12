@@ -26,7 +26,7 @@ class Criteria
 }
 ```
 
-See: [src/Criteria.php](src/Criteria.php).
+See: [Criteria.php](src/Criteria.php).
 
 ### An example with orders
 
@@ -56,7 +56,7 @@ new Criba\Condition(field: 'amount', operator: '<', value: 1000, negate: true);
 new Criba\Condition('amount', '<', 1000, true);
 ```
 
-See: [src/Condition.php](src/Condition.php).
+See: [Condition.php](src/Condition.php).
 
 ### Comparing fields
 
@@ -70,7 +70,7 @@ new Criba\Criteria(
 );
 ```
 
-See: [src/Comparison.php](src/Comparison.php).
+See: [Comparison.php](src/Comparison.php).
 
 ### Joining conditions and comparisons
 
@@ -116,7 +116,7 @@ new Criba\Criteria(
 );
 ```
 
-See: [src/Filter.php](src/Filter.php).
+See: [Filter.php](src/Filter.php).
 
 ### Pushing a criteria to a specification
 
@@ -157,7 +157,7 @@ $query->get()->all();
 
 At this moment, only an Eloquent implementation has been written.
 
-See: [tests/Fixtures/Eloquent/Repository/CountryRepository.php](tests/Fixtures/Eloquent/Repository/CountryRepository.php) to check how this fits when used with the repository pattern (in a domain driven design example).
+See: [CountryRepository.php](tests/Fixtures/Eloquent/Repository/CountryRepository.php) to check how this fits when used with the repository pattern (in a domain driven design example).
 
 ## Install
 
