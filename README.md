@@ -161,7 +161,17 @@ See: [CountryRepository.php](tests/Fixtures/Eloquent/Repository/CountryRepositor
 
 ## Install
 
-For the moment this isn't a production ready package, so it isn't still available via Composer. If you still want to test it then clone it and use Composer to install its dependencies.
+### Via Composer (recommended for production)
+
+To be able to use the **Criba** classes in your PHP project, the easiest and recommended way is to require it via Composer.
+
+```bash
+composer require hawara/criba
+```
+
+### Via GitHub (recommended for development)
+
+If instead you want to modify this package itself (for instance, to send a pull request), you are encouraged to clone this repository using Git.
 
 ```bash
 git clone https://github.com/hawara-es/criba.git
