@@ -24,7 +24,7 @@ class Criteria
         }
 
         if (! $page) {
-            $page = new Page(50, 0);
+            $page = new Page();
         }
 
         $this->filter = $filter;

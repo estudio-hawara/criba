@@ -14,12 +14,26 @@ I started this repository when I was following some [CodelyTV](https://codely.co
 
 ## Define a criteria
 
+A criteria is the combination of a filter, an order by clause and a pagination criteria.
+
+```php
+class Criteria
+{
+    public readonly Filter $filter;
+    public readonly OrderBy $orderBy;
+    public readonly Page $page;
+    // ...
+}
+```
+
+See: [src/Criteria.php](src/Criteria.php).
+
 ### An example with orders
 
 Let's say you have an order class with a property amount and you want to implement a view that shows the latest 10 orders with an amount greater or equal than 1000 (of whatever currency). First, you implement the criteria without any concern about how it will be translated to a particular database engine.
 
 ```php
-$criteria = new Criba\Criteria(
+new Criba\Criteria(
     new Criba\Filter(
         new Criba\Condition('amount', '>=', 1000),
     ),
@@ -28,9 +42,85 @@ $criteria = new Criba\Criteria(
 );
 ```
 
+This example shows the simpler possible example of a filter, where it only consists in a single condition.
+
+### Negate a condition
+
+As you may imagine from the example above, conditions require a field name, an operator and a value. But they also accept an additional `negate` boolean that can be used to invert them.
+
+```php
+// we added the name of the arguments here for readability
+new Criba\Condition(field: 'amount', operator: '<', value: 1000, negate: true);
+
+// or in short form
+new Criba\Condition('amount', '<', 1000, true);
+```
+
+See: [src/Condition.php](src/Condition.php).
+
+### Comparing fields
+
+In order to compare two fields, rather than a field with a value, you can use comparisons, which can be used wherever conditions can be used.
+
+```php
+new Criba\Criteria(
+    new Criba\Filter(
+        new Criba\Comparison('amount_due', '>', 'amount_paid'),
+    ),
+);
+```
+
+See: [src/Comparison.php](src/Comparison.php).
+
+### Joining conditions and comparisons
+
+To define more complex filters, conditions and comparisons can be joined with either `and` or `or`.
+
+```php
+new Criba\Criteria(
+    new Criba\Filter(
+        new Criba\Condition('amount', '>=', 1000),
+        'and',
+        new Criba\Comparison('amount_due', '>', 'amount_paid'),
+    ),
+    new Criba\OrderBy(['order_date' => 'asc']),
+    new Criba\Page(10, 0)
+);
+```
+
+This example shows how filters support three arguments:
+
+- the 1st and 3rd argument, must be conditions, comparisons or other filters (see more examples below),
+- the 2nd argument bust be one of the strings: `and` or `or`.
+
+### Going crazy with recursion
+
+The most powerful thing of this package is the possibility of using other filters in the place of conditions and comparisons.
+
+```php
+$confirmed = new Criba\Filter(
+    new Criba\Comparison('amount_due', '>', 'amount_paid'),
+    'or',
+    new Criba\Condition('status', '=', 'confirmed'),
+    parentheses: true
+),
+
+new Criba\Criteria(
+    new Criba\Filter(
+        new Criba\Condition('amount', '>=', 1000),
+        'and',
+        $confirmed
+    ),
+    new Criba\OrderBy(['order_date' => 'asc']),
+    new Criba\Page(10, 0)
+);
+```
+
+See: [src/Filter.php](src/Filter.php).
+
 ### Pushing a criteria to a specification
 
-What's nice about the previous example is that if we were happy with that implementation and we wanted to push it to our code so that it represents part of our business logic, we could simply wrap it around a class.
+What's nice about the class based API is that if we were happy with that implementation and we wanted to push it to our code so that it represents part of our business logic, we could simply wrap it around a class.
 
 ```php
 class TopOrdersCriteria extends Criba\Criteria
@@ -65,29 +155,52 @@ $query = $builder->query(new TopOrdersCriteria);
 $query->get()->all();
 ```
 
+At this moment, only an Eloquent implementation has been written.
+
 ## Install
 
-For the moment, this isn't a production ready package. So it isn't still available via Composer. If you still want to test it, clone it and use Composer to install its dependencies.
+For the moment this isn't a production ready package, so it isn't still available via Composer. If you still want to test it then clone it and use Composer to install its dependencies.
 
 ```bash
 git clone https://github.com/hawara-es/criba.git
 
 composer install
+
+# optionally, you can install the package in production mode
+# but you won't be able to run the test suite
+composer install --no-dev
 ```
 
+### Dependencies
+
+This package does only have two types of dependencies:
+
+- the **suggested**, which are not actual dependencies as you may not use them,
+- the **development** ones, which you will only need if you are going to participate in the package development.
+
+In practice, it means that if you install it in production mode, no dependencies will be installed.
+
 ## Open a debug session
+
+The [PsySH](https://psysh.org) debugger is installed as a Composer dependency, what means that you can quickly open an interactive PHP session to test a criteria by running:
 
 ```bash
 vendor/bin/psysh
 ```
 
+The session will autoload the project namespaces, so you can directly run `new Criba\Criteria` without even adding a **use** statement.
+
 ## Run the tests
+
+The [Pest](https://pestphp.com) test engine helps tests being beautiful, readable, quick and are integrated into a GitHub workflow, so every pull request will run them.
 
 ```bash
 vendor/bin/pest
 ```
 
 ## Fix the code style
+
+The [Pint](https://laravel.com/docs/10.x/pint) code style fixer has been set up to facilitate following Laravel's suggested coding styles.
 
 ```bash
 vendor/bin/pint
