@@ -1,5 +1,5 @@
 {
-    "name": "hawara-es/criba",
+    "name": "hawara/criba",
     "description": "A generic implementation of the criteria pattern",
     "license": "MIT",
     "autoload": {
