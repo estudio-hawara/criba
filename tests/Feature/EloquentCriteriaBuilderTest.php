@@ -21,6 +21,7 @@ beforeEach(function () {
         'id' => '34d033f5-9925-4fed-995a-9acf866e150d',
         'name' => 'España',
         'alpha2' => 'ES',
+        'description' => 'Great tortilla de papas',
     ]);
 
     $model = CountryModel::class;
@@ -32,6 +33,17 @@ it('can be used with an empty criteria', function () {
     $countries = $this->repository->search(new Criteria());
 
     expect($countries->count())->toBe(CountryModel::count());
+});
+
+it('can be used to filter null fields with the equal operator (`=`)', function () {
+    $countries = $this->repository->search(new Criteria(
+        new Filter(
+            new Condition('description', '=', null),
+        ),
+    ));
+
+    expect($countries->count())->toBe(1);
+    expect($countries->countries[0]->name)->toBe('Afganistán');
 });
 
 it('can be used with a condition that uses the equal operator (`=`)', function () {

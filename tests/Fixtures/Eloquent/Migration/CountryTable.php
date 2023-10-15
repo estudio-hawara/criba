@@ -21,6 +21,7 @@ class CountryTable
             $table->uuid('id');
             $table->string('name')->unique();
             $table->char('alpha2', 2);
+            $table->string('description')->nullable();
         });
     }
 
