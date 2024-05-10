@@ -1,7 +1,7 @@
 # Criba
 
 > [!NOTE]
-> This is a pedagogical package. Do not use it in production environments. Feel free to contact us (check the package authors) if you want a production ready version of this.
+> This is a pedagogical package. Do not use it in production environments.
 
 Criba is a PHP implementation of the **criteria pattern**. It facilitates searching, sorting and paginating records by offering a class based API that defines certain filters so they can latter be applied.
 
